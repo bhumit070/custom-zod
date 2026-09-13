@@ -1,4 +1,4 @@
-import { Validator } from '../../parser.js';
+import { Validator } from '../parser.js';
 
 export class NumberValidator extends Validator {
   protected minValue: number | undefined;

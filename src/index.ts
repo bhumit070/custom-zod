@@ -1,5 +1,5 @@
-import { NumberValidator } from './validators/number/index.js';
-import { StringValidator } from './validators/string/index.js';
+import { NumberValidator } from './validators/number.js';
+import { StringValidator } from './validators/string.js';
 
 type CustomZod = {
   string: () => StringValidator;
