@@ -1,4 +1,4 @@
-import { StringValidator } from './validators/string.js';
+import { StringValidator } from './validators/string/index.js';
 
 export class Validator {
   private value: unknown = undefined;
