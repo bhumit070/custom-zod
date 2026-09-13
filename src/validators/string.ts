@@ -1,8 +1,8 @@
 import { Validator } from '../parser.js';
 
 export class StringValidator extends Validator {
-  protected minLength: number | null = null;
-  protected maxLength: number | null = null;
+  protected minLength: number | undefined = undefined;
+  protected maxLength: number | undefined = undefined;
 
   constructor() {
     super();
