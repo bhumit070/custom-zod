@@ -25,4 +25,31 @@ export class NumberValidator extends Validator {
     this.mustBeFloat = true;
     return this;
   }
+
+  protected _parse(value: unknown): [boolean, Array<string>] {
+    const errors: Array<string> = [];
+
+    if (typeof value !== 'number' || Number.isNaN(value)) {
+      errors.push('Value must be a valid number');
+      return [false, errors];
+    }
+
+    if (this.minValue !== undefined && value < this.minValue) {
+      errors.push(`Value must be at least ${this.minValue}`);
+    }
+
+    if (this.maxValue !== undefined && value > this.maxValue) {
+      errors.push(`Value must be at most ${this.maxValue}`);
+    }
+
+    if (this.mustBeInteger && !Number.isInteger(value)) {
+      errors.push('Value must be an integer');
+    }
+
+    if (this.mustBeFloat && Number.isInteger(value)) {
+      errors.push('Value must be a float');
+    }
+
+    return [errors.length === 0, errors];
+  }
 }
