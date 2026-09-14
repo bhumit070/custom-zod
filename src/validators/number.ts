@@ -26,12 +26,12 @@ export class NumberValidator extends Validator {
     return this;
   }
 
-  protected _parse(value: unknown): [boolean, Array<string>] {
+  parse<T = number>(value: unknown): T {
     const errors: Array<string> = [];
 
     if (typeof value !== 'number' || Number.isNaN(value)) {
       errors.push('Value must be a valid number');
-      return [false, errors];
+      throw new Error(errors.join(','));
     }
 
     if (this.minValue !== undefined && value < this.minValue) {
@@ -50,6 +50,8 @@ export class NumberValidator extends Validator {
       errors.push('Value must be a float');
     }
 
-    return [errors.length === 0, errors];
+    if (errors.length) throw new Error(errors.join(','));
+
+    return value as unknown as T;
   }
 }

@@ -18,12 +18,12 @@ export class StringValidator extends Validator {
     return this;
   }
 
-  protected _parse(value: unknown): [boolean, Array<string>] {
+  public parse<T = string>(value: unknown): T {
     const errors: Array<string> = [];
 
     if (typeof value !== 'string') {
       errors.push('Value must be a string');
-      return [false, errors];
+      throw new Error(errors.join(','));
     }
 
     if (this.minLength !== undefined) {
@@ -38,6 +38,8 @@ export class StringValidator extends Validator {
       }
     }
 
-    return [errors.length === 0, errors];
+    if (errors.length) throw new Error(errors.join(','));
+
+    return value as unknown as T;
   }
 }
