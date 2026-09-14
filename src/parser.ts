@@ -1,3 +1,4 @@
-export abstract class Validator {
-  abstract parse<T>(value: unknown): T;
+export abstract class Validator<Output = any> {
+  readonly _output!: Output;
+  abstract parse(value: unknown): Output;
 }

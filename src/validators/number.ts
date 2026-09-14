@@ -1,6 +1,6 @@
 import { Validator } from '../parser.js';
 
-export class NumberValidator extends Validator {
+export class NumberValidator extends Validator<number> {
   protected minValue: number | undefined;
   protected maxValue: number | undefined;
   protected mustBeInteger: boolean = false;
@@ -26,7 +26,7 @@ export class NumberValidator extends Validator {
     return this;
   }
 
-  parse<T = number>(value: unknown): T {
+  public parse(value: unknown): number {
     const errors: Array<string> = [];
 
     if (typeof value !== 'number' || Number.isNaN(value)) {
@@ -52,6 +52,6 @@ export class NumberValidator extends Validator {
 
     if (errors.length) throw new Error(errors.join(','));
 
-    return value as unknown as T;
+    return value;
   }
 }

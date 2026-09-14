@@ -1,6 +1,6 @@
 import { Validator } from '../parser.js';
 
-export class StringValidator extends Validator {
+export class StringValidator extends Validator<string> {
   protected minLength: number | undefined = undefined;
   protected maxLength: number | undefined = undefined;
 
@@ -18,7 +18,7 @@ export class StringValidator extends Validator {
     return this;
   }
 
-  public parse<T = string>(value: unknown): T {
+  public parse(value: unknown): string {
     const errors: Array<string> = [];
 
     if (typeof value !== 'string') {
@@ -40,6 +40,6 @@ export class StringValidator extends Validator {
 
     if (errors.length) throw new Error(errors.join(','));
 
-    return value as unknown as T;
+    return value;
   }
 }
